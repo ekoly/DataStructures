@@ -1,6 +1,7 @@
 import unittest
 
 from DataStructures import DoubleLinkedList
+# DoubleLinkedList = list # all tests pass when this line is uncommented
 
 class TestDLL(unittest.TestCase):
 
@@ -148,6 +149,56 @@ class TestDLL(unittest.TestCase):
         self.assertEqual(ll[-4], 511)
         self.assertEqual(ll[-5], 1)
         self.assertEqual(ll[-6], 0)
+
+    def test_repeat_insert_pop_head(self):
+
+        ll = DoubleLinkedList(range(5))
+
+        ll.insert(0, 511)
+        self.assertEqual(ll.pop(0), 511)
+        ll.insert(-5, 511)
+        self.assertEqual(ll.pop(-6), 511)
+
+        self.assertEqual(ll[0], 0)
+        self.assertEqual(ll[-5], 0)
+        self.assertEqual(ll[1], 1)
+        self.assertEqual(ll[-4], 1)
+
+    def test_repeat_insert_pop_tail(self):
+
+        ll = DoubleLinkedList(range(5))
+
+        ll.insert(-1, 511)
+        self.assertEqual(ll.pop(-2), 511)
+        ll.insert(5, 511)
+        self.assertEqual(ll.pop(5), 511)
+        ll.insert(5, 511)
+        self.assertEqual(ll.pop(-1), 511)
+
+        self.assertEqual(ll[0], 0)
+        self.assertEqual(ll[-5], 0)
+        self.assertEqual(ll[-1], 4)
+        self.assertEqual(ll[4], 4)
+        self.assertEqual(ll[-2], 3)
+        self.assertEqual(ll[3], 3)
+
+    def test_repeat_insert_pop_middle(self):
+
+        ll = DoubleLinkedList(range(5))
+
+        ll.insert(-2, 511)
+        self.assertEqual(ll.pop(-3), 511)
+        ll.insert(2, 511)
+        self.assertEqual(ll.pop(2), 511)
+        ll.insert(3, 511)
+        self.assertEqual(ll.pop(3), 511)
+
+        self.assertEqual(ll[0], 0)
+        self.assertEqual(ll[-5], 0)
+        self.assertEqual(ll[-1], 4)
+        self.assertEqual(ll[4], 4)
+        self.assertEqual(ll[-2], 3)
+        self.assertEqual(ll[3], 3)
 
 if __name__ == "__main__":
     unittest.main() 

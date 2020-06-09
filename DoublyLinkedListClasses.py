@@ -83,13 +83,19 @@ class DoubleLinkedList:
                 for _ in range(-index - 1):
                     if node is None:
                         break
+                    node = node.prev
                 if node is None:
                     self.__head.prev = ListNode(obj, next_node=self.__head)
                     self.__head = self.__head.prev
                     return
 
-            node.prev.next = ListNode(obj, next_node=node, prev_node=node.prev)
-            node.prev = node.prev.next
+            if node.prev is None: # changing head
+                self.__head.prev = ListNode(obj, next_node=self.__head)
+                self.__head = self.__head.prev
+
+            else:
+                node.prev.next = ListNode(obj, next_node=node, prev_node=node.prev)
+                node.prev = node.prev.next
 
     def pop(self, *args):
 
