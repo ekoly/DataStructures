@@ -2,4 +2,5 @@
 
 from DataStructures.LinkedListClasses import LinkedList
 from DataStructures.StackClasses import Stack
-from DataStructures.QueueClasses import Queue
+from DataStructures.QueueClasses import Queue, Deque
+from DataStructures.DoublyLinkedListClasses import DoubleLinkedList
