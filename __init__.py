@@ -4,3 +4,4 @@ from DataStructures.LinkedListClasses import LinkedList
 from DataStructures.DoublyLinkedListClasses import DoubleLinkedList
 from DataStructures.StackClasses import Stack
 from DataStructures.QueueClasses import Queue, Deque
+from DataStructures.BSTClasses import BinarySearchTree

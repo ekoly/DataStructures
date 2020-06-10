@@ -124,29 +124,6 @@ class DoubleLinkedList:
 
         return obj
 
-    def __get_node(self, index):
-
-        assert type(index) == int
-
-        if self.__head is None:
-            raise IndexError("Cannot access item in empty list")
-
-        if index >= 0:
-            node = self.__head
-            for _ in range(index):
-                if node.next is None:
-                    raise IndexError("index out of range")
-                node = node.next
-
-        else:
-            node = self.__tail
-            for _ in range(-index - 1):
-                if node.prev is None:
-                    raise IndexError("index out of range")
-                node = node.prev
-
-        return node
-
     def __getitem__(self, index):
         return self.__get_node(index).val
 
@@ -177,3 +154,26 @@ class DoubleLinkedList:
             node = node.next
             counter += 1
         return counter
+
+    def __get_node(self, index):
+
+        assert type(index) == int
+
+        if self.__head is None:
+            raise IndexError("Cannot access item in empty list")
+
+        if index >= 0:
+            node = self.__head
+            for _ in range(index):
+                if node.next is None:
+                    raise IndexError("index out of range")
+                node = node.next
+
+        else:
+            node = self.__tail
+            for _ in range(-index - 1):
+                if node.prev is None:
+                    raise IndexError("index out of range")
+                node = node.prev
+
+        return node
