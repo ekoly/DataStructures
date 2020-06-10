@@ -71,6 +71,7 @@ class BinarySearchTree:
                 return
 
     def remove(self, x):
+        # TODO only works for root node
         if self.__root.val == x:
             if not self.__root.left and not self.__root.right:
                 pass
@@ -92,6 +93,44 @@ class BinarySearchTree:
                     except:
                         break
 
+    def getMin(self):
+        if self.__root is None:
+            raise ValueError("Cannot get min of empty sequence")
+        node = self.__root
+        while node.left is not None:
+            node = node.left
+        return node.val
+
+    def getMax(self):
+        if self.__root is None:
+            raise ValueError("Cannot get max of empty sequence")
+        node = self.__root
+        while node.right is not None:
+            node = node.right
+        return node.val
+
+    def __iter__(self):
+        self.__lineup = []
+        if self.__root is None:
+            return self
+        node = self.__root
+        while node is not None:
+            self.__lineup.append(node)
+            node = node.left
+        return self
+
+    def __next__(self):
+        if not self.__lineup:
+            raise StopIteration()
+        node = self.__lineup.pop()
+        obj = node.val
+        if node.right:
+            node = node.right
+            while node is not None:
+                self.__lineup.append(node)
+                node = node.left
+        return obj
+
     def __contains__(self, x):
 
         node = self.__root
@@ -105,4 +144,3 @@ class BinarySearchTree:
                 return True
 
         return False
-
