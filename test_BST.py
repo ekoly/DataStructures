@@ -40,5 +40,23 @@ class test_BST(unittest.TestCase):
         b.insert(7)
         self.assertEqual([x for x in b], [3, 5, 7])
 
+    def test_remove_root(self):
+        b = BinarySearchTree([64, 32, 96, 16, 48, 80, 112])
+        b.remove(64)
+        self.assertTrue(64 not in b)
+        self.assertTrue(32 in b)
+        self.assertTrue(96 in b)
+        self.assertTrue(112 in b)
+
+    def test_remove_node(self):
+        b = BinarySearchTree([64, 32, 96, 16, 48, 80, 112])
+        b.remove(32)
+        self.assertTrue(64 in b)
+        self.assertTrue(32 not in b)
+        self.assertTrue(16 in b)
+        self.assertTrue(48 in b)
+        self.assertTrue(96 in b)
+        self.assertTrue(112 in b)
+
 if __name__ == "__main__":
     unittest.main()
