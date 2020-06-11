@@ -80,18 +80,42 @@ class BinarySearchTree:
             elif not self.__root.left and self.__root.right:
                 self.__root = self.__root.right
             else:
+                q = Queue([self.__root.left, self.__root.right])
                 self.__root = None
-                nodes = Queue([self.__root.left, self.__root.right])
-                while True:
-                    try:
-                        node = nodes.pop()
-                        if node.left:
-                            nodes.push(node.left)
-                        if node.right:
-                            nodes.push(node.right)
-                        self.insert(node.val)
-                    except:
-                        break
+                self.__absorbSubtree(q)
+        else:
+            parent = None
+            node = self.__root
+            while node is not None and node.val != x:
+                parent = node
+                if x < node.val:
+                    node = node.left
+                else:
+                    node = node.right
+            if node is None:
+                raise ValueError("Value not in BST")
+            if parent.left is node:
+                if node.left is None and node.right is None:
+                    parent.left = None
+                elif node.left is None and node.right is not None:
+                    parent.left = node.right
+                elif node.left is not None and node.right is None:
+                    parent.left = node.left
+                else:
+                    nodes = Queue([node.left, node.right])
+                    parent.left = None
+                    self.__absorbSubtree(nodes)
+            else:
+                if node.left is None and node.right is None:
+                    parent.right = None
+                elif node.left is None and node.right is not None:
+                    parent.right = node.right
+                elif node.left is not None and node.right is None:
+                    parent.right = node.left
+                else:
+                    nodes = Queue([node.left, node.right])
+                    parent.right = None
+                    self.__absorbSubtree(nodes)
 
     def getMin(self):
         if self.__root is None:
@@ -144,3 +168,13 @@ class BinarySearchTree:
                 return True
 
         return False
+
+    def __absorbSubtree(self, q):
+
+        while not q.isEmpty():
+            node = q.pop()
+            if node.left:
+                q.push(node.left)
+            if node.right:
+                q.push(node.right)
+            self.insert(node.val)

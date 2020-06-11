@@ -48,6 +48,9 @@ class DoubleLinkedList:
         for obj in iterable:
             self.append(obj)
 
+    def isEmpty(self):
+        return self.__head is None
+
     def append(self, obj):
 
         if self.__head is None:

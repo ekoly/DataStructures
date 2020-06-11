@@ -1,7 +1,10 @@
 from DataStructures import DoubleLinkedList
 
 
-def Queue(DoubleLinkedList):
+class Queue(DoubleLinkedList):
+
+    def __init__(self, *args):
+        super().__init__(*args)
 
     def push(self, val):
         self.append(val)
@@ -12,7 +15,7 @@ def Queue(DoubleLinkedList):
     def peek(self):
         return self[0]
 
-def Deque(DoubleLinkedList):
+class Deque(DoubleLinkedList):
 
     def pushFront(self, val):
         self.insert(0, val)
